@@ -9,7 +9,7 @@
 | Curso | Ciência da Computação, Centro Universitário de Maceió (UNIMA/Afya) |
 | Integrantes | Bernardo Torres de Souza e Kaue Cavalcante |
 | Repositório | <https://github.com/bernardots23/borapelada> |
-| GitHub Project | `[link do Project]` |
+| GitHub Project | <https://github.com/users/bernardots23/projects/2> |
 
 ---
 
