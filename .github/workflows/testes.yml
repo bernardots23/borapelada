@@ -1,0 +1,36 @@
+# Roda os testes a cada push e Pull Request, com um MongoDB real.
+name: Testes
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:7
+        ports:
+          - 27017:27017
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar dependências
+        run: |
+          npm install --prefix server --no-audit --no-fund
+          npm install --prefix web --no-audit --no-fund
+
+      - name: Testes unitários (sorteio de times)
+        run: npm test --prefix server
+
+      - name: Testes de integração (API + chat + MongoDB)
+        run: npm run test:integracao --prefix server
+        env:
+          MONGO_URL: mongodb://localhost:27017
+
+      - name: Build do front-end
+        run: npm run build --prefix web
