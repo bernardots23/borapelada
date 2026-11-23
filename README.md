@@ -11,7 +11,7 @@ App web para organizar peladas de futebol amador. Com ele, o grupo pode:
 ## 📄 Documentação e acompanhamento
 
 - **[PRD: Documento de Requisitos do Produto](docs/PRD.md)**
-- **GitHub Project:** `[cole aqui o link do Project]`
+- **GitHub Project:** <https://github.com/users/bernardots23/projects/2>
 
 ## 👥 Integrantes
 
