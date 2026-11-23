@@ -1,0 +1,36 @@
+# Sobe o BoraPelada completo: MongoDB + aplicação.
+#   docker compose up --build
+#   docker compose exec app npm run seed      (dados de demonstração)
+# Acesse: http://localhost:3001
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - dados-mongo:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      MONGO_URL: mongodb://mongo:27017
+      MONGO_DB: borapelada
+      JWT_SECRET: ${JWT_SECRET:-troque-este-segredo}
+      WEB_ORIGIN: http://localhost:3001
+      TZ: America/Maceio
+
+volumes:
+  dados-mongo:
